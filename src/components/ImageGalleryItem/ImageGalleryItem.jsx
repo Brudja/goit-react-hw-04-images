@@ -1,45 +1,45 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './ImageGalleryItem.module.css';
 import { Modal } from '../Modal/Modal';
 import PropTypes from 'prop-types';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    largeImage: null,
-  };
+export const ImageGalleryItem = ({images}) => {
+  const[largeImage, setLargeImage] = useState(null);
+  // state = {
+  //   largeImage: null,
+  // };
 
-  openModal = img => {
-    if (!this.state.largeImage) {
+  const openModal = img => {
+    if (!largeImage) {
       const { largeImageURL, tags } = img;
-      this.setState({ largeImage: { tags, largeImageURL } });
+      setLargeImage({ tags, largeImageURL });
       return;
     }
-    this.setState({ largeImage: null });
+    setLargeImage( null );
   };
 
-  render() {
+ 
     return (
       <>
-        {this.props.images.map(image => (
+        {images.map(image => (
           <li key={image.id} className={css.galleryItem}>
             <img
               className={css.liImage}
               src={image.webformatURL}
               alt={image.tags}
-              onClick={() => this.openModal(image)}
+              onClick={() => openModal(image)}
             />
           </li>
         ))}
-        {this.state.largeImage && (
+        {largeImage && (
           <Modal
-            img={this.state.largeImage.largeImageURL}
-            alt={this.state.largeImage.tags}
-            onClose={this.openModal}
+            img={largeImage.largeImageURL}
+            alt={largeImage.tags}
+            onClose={openModal}
           />
         )}
       </>
     );
-  }
 }
 
 ImageGalleryItem.propTypes = {

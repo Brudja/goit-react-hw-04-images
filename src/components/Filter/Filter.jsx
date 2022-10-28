@@ -1,29 +1,35 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
-export class Filter extends Component {
-   
-    render() {
-            return (
-        <div
+export const Filter = () => {
+  return (
+    <div
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      <p
         style={{
-          textAlign: "center",
-        }}>
-          <p style={{
           fontSize: '20px',
-        }}>Find contacts by name</p>
-          <label>Filter<br/><input
-            type="text"
-            name="filter"
-            onChange={this.props.chengeName}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          /></label>
-        </div>)
-}}
+        }}
+      >
+        Find contacts by name
+      </p>
+      <label>
+        Filter
+        <br />
+        <input
+          type="text"
+          name="filter"
+          onChange={this.props.chengeName}
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+        />
+      </label>
+    </div>
+  );
+};
 
 Filter.propTypes = {
   chengeName: PropTypes.func.isRequired,
-}
+};

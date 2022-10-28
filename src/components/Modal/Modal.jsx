@@ -1,41 +1,53 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 import PropTypes from 'prop-types';
 
 const modalWindow = document.querySelector('#modal-root');
 
-export class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.onEscape);
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.onEscape);
-  }
+export const Modal =({onClose,img,alt})=> {
 
-  onEscape = event => {
+
+  useEffect(()=>{add()
+  return remove()
+})
+
+function add() {
+  window.addEventListener('keydown', onEscape)
+}
+function remove(){
+  window.addEventListener('keydown', onEscape)
+}
+  // componentDidMount() {
+  //   window.addEventListener('keydown', this.onEscape);
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener('keydown', this.onEscape);
+  // }
+
+  const onEscape = event => {
     if (event.code === 'Escape') {
-      this.props.onClose();
+      onClose();
     }
   };
 
-  hendleClick = event => {
+  const hendleClick = event => {
     if (event.target === event.currentTarget) {
-      this.props.onClose();
+      onClose();
     }
   };
 
-  render() {
+
     return createPortal(
-      <div className={css.overlay} onClick={this.hendleClick}>
+      <div className={css.overlay} onClick={hendleClick}>
         <div className={css.modal}>
-          <img src={this.props.img} alt={this.props.alt} />
+          <img src={img} alt={alt} />
         </div>
       </div>,
       modalWindow
     );
-  }
 }
 
 Modal.protoType = {
